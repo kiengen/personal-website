@@ -1,0 +1,207 @@
+#root {
+  margin: 0;
+  padding: 0;
+  position: flex;
+}
+
+.main-container {
+  background-color: var(--background-color);
+  width: 100vw;
+  height: 386vh;
+  position: flex;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 8vh;
+  width: 100vw;
+}
+
+.header-splitter {
+  display: flex;
+  justify-content: space-evenly;
+  flex: 1;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  color: var(--fancy-font-color);
+  font-weight: 500;
+}
+
+.padding-container-a {
+  height: 90vh;
+  width: 80vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  flex: 1.5;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  white-space-collapse: preserve;
+}
+
+.padding-container-top {
+  height: 75vh;
+  width: 80vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-top: 5vh;
+  padding-bottom: 20vh;
+  flex: 1.5;
+  align-items: flex-end;
+  justify-content: center;
+  display: flex;
+  white-space-collapse: preserve;
+}
+
+.padding-container-b {
+  height: 90vh;
+  width: 80vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  margin-left: 5vw;
+  padding-left: 5vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  flex: 1.5;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: flex;
+  white-space-collapse: preserve;
+  background-color: var(--fancy-font-color);
+}
+
+.flex-container-h {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  position: flex;
+  justify-content: center;
+}
+
+.flex-container-v {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-grow: 1;
+  height: 100%;
+  position: flex;
+}
+
+.center-container {
+  align-items: center;
+  justify-content: center;
+}
+
+.project-box {
+  height: 100%;
+  position: relative;
+  margin: 2%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-container {
+  height: 80%;
+  width: 80%;
+  padding: 2%;
+  border-width: 2px;
+  border: 3px;
+  border-color: var(--background-color);
+  border-style: solid;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  background-color: var(--background-color);
+  transition: ease opacity 300ms;
+  opacity: 0;
+}
+.project-overlay:hover {
+  cursor: pointer;
+  opacity: 100;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 25%;
+}
+
+.project-caption {
+  color: var(--background-color);
+  font-weight: 600;
+  font-size: 25;
+  justify-items: flex-end;
+  width: fit-content;
+  padding: 5px;
+  border-width: 2px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.project-icon {
+  color: var(--background-color);
+  font-size: 40px;
+}
+
+.fancy-font {
+  color: var(--fancy-font-color);
+  font-size: 40px;
+}
+
+.centered-small-font {
+  font-size: 18px;
+  text-align: center;
+  align-self: center;
+  color: var(--fancy-font-color);
+}
+
+.centered-small-font-padding {
+  font-size: 18px;
+  text-align: center;
+  align-self: center;
+  color: var(--fancy-font-color);
+  padding-bottom: 35vh;
+}
+
+.button {
+  color: var(--fancy-font-color);
+  text-decoration: none;
+  transition: ease color 100ms;
+  transition: ease background-color 100ms;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+}
+.button:hover{
+  color: var(--background-color);
+  background-color: var(--fancy-font-color);
+  cursor: pointer;
+}
