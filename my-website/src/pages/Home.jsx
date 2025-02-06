@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import Header from "../components/Header.jsx";
 import ProjectTile from "../components/ProjectTile.jsx";
+import Modal from "../components/Modal.jsx";
 import Feather from 'feather-icons-react';
 
 export default function HomePage() {
     let navigate = useNavigate();
-
-    const validatePassword = () => {
-        navigate('/ksengen');
-    };
+    const [projData, setProjData] = useState(null);
 
     return (
         <div className="main-container">
+            {projData && <Modal setIsOpen={setProjData} data={projData}/>}
             <Header/>
             <div className="padding-container-top">
                 <div className="center-container">
@@ -35,8 +34,8 @@ export default function HomePage() {
 
             <div className="padding-container-b">
                 <div className="flex-container-v">
-                    <ProjectTile projectName="grades app" iconName="book-open" imagePath="/assets/grades_app1.PNG"/>
-                    <ProjectTile projectName="yelp app" iconName="smartphone" imagePath="/assets/yelp_api.png"/>
+                    <ProjectTile clickFunc={setProjData} projectName="grades app" iconName="book-open" imagePath="/assets/grades_app1.PNG" projData={{"skills": "Expo Go, React Native, JavaScript, TypeScript", "images": "/assets/grades"}}/>
+                    <ProjectTile clickFunc={setProjData} projectName="yelp app" iconName="smartphone" imagePath="/assets/yelp_api.png" projData={{"skills": "Expo Go, React Native, JavaScript, TypeScript, Yelp API", "images": "/assets/yelp"}}/>
                     <ProjectTile projectName="calculator app" iconName="divide-square" imagePath="/assets/calculator_app.png"/>
                 </div>
                 <div className="flex-container-v">

@@ -19,13 +19,16 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  --background-color: rgb(208, 245, 183);
-  --fancy-font-color: rgb(41, 167, 146);
-  --overlay-color: #fdfff0;
+  --background-color: rgb(209, 245, 168);
+  --fancy-font-color: rgb(62, 180, 151);
+  --overlay-color: #e7f1de;
 }
 body.dark {
-  --background-color: rgb(41, 167, 146);
-  --fancy-font-color: rgb(208, 245, 183);
-  --overlay-color: #fdfff0;
+  /**--background-color: rgb(83, 117, 104);
+  --fancy-font-color: rgb(165, 204, 121);
+  --overlay-color: #fdfff0;**/
+  --background-color: rgb(60, 133, 114);
+  --fancy-font-color: rgb(174, 209, 134);
+  --overlay-color: #636657;
 }
 
