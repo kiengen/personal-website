@@ -19,7 +19,7 @@ export default function Header() {
     return (
         <div className="header-container">
             <div className="header-splitter">
-                <text>Kiersten Engen</text>
+                <>Kiersten Engen</>
             </div>
             <div className="header-splitter">
                 <Link className="button" to="/">home</Link>
