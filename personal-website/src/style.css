@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --background: #cffdcb;
+  --a: gray;
+  --b: #4066ce;
+  --ui: #464646;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme inline {
+  --color-bg: var(--background);
+  --color-a: var(--a);
+  --color-b: var(--b);
+  --color-c: var(--c);
+  --color-ui: var(--ui);
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  margin: 0;
-  padding: 0;
-  position: flex;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #383a3a;
+    --a: #4fcaf0;
+    --b: #4066ce;
+    --ui: white;
+  }
 }
 
 button {
@@ -40,18 +45,24 @@ button:focus-visible {
 
 #app {
   margin: 0 auto;
+  position: flex;
+  background-color: var(--background);
+  width: 100%;
+  height: 100%;
+
   text-align: center;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.unselectable {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
