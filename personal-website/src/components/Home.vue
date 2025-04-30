@@ -3,18 +3,18 @@
     import FeatherButton from './FeatherButton.vue';
     import InfiniteScroll from './InfiniteScroll.vue';
 
-    const projects = [{name: "Godot Game", photo: "godot.png"},
-                      {name: "GLASSES", photo: ""},
-                      {name: "1", photo: ""},
-                      {name: "Darwin Game", photo: "darwin.png"},
-                      {name: "Clue Bot", photo: ""},
-                      {name: "Grades App", photo: ""},
-                      {name: "trvl", photo: ""},
-                      {name: "Personal Website", photo: ""},
-                      {name: "CheckMate", photo: ""},
-                      {name: "Something else", photo: ""},
-                      {name: "a", photo: ""},
-                      {name: "b", photo: ""},
+    const projects = [{name: "Godot Game", photo: "godot/1.png"},
+                      {name: "GLASSES", photo: "uome/1.png"},
+                      {name: "Platformer", photo: "platformer/1.png"},
+                      {name: "Darwin Game", photo: "darwin/1.png"},
+                      {name: "Clue Bot", photo: "clue/1.png"},
+                      {name: "Grades App", photo: "grades/1.png"},
+                      {name: "trvl", photo: "trvl/1.png"},
+                      {name: "Personal Website", photo: "website/1.png"},
+                      {name: "CheckMate", photo: "uome/1.png"},
+                      {name: "Calculator", photo: "calculator/1.png"},
+                      {name: "a", photo: "darwin/3.png"},
+                      {name: "b", photo: "website/2.png"},
                       {name: "c", photo: ""},
     ];
 </script>
@@ -39,18 +39,16 @@
     </div>
 
     <!-- SECOND SECTION (Project Carousel) -->
-    <div class="bg-black w-full h-full flex flex-col min-h-85 justify-center">
-        <div class="h-full max-h-150 flex flex-col">
+    <div class="bg-bg w-full h-[80vw] max-h-300 flex flex-col min-h-85 justify-center">
+        <div class="h-full w-full max-h-150 flex flex-col">
             <h1 class="text-3xl text-ui h-15">Projects</h1>
-            <InfiniteScroll :inputItems="projects"/>
-            <div class="flex-1 w-full bg-b">
-            </div>
-            <div class="flex-1 w-full bg-green-100">
-            </div>
+            <InfiniteScroll :inputItems="projects" id="1"/>
+            <InfiniteScroll :inputItems="projects" id="2" offset="3"/>
+            <InfiniteScroll :inputItems="projects" id="3" offset="9"/>
         </div>
     </div>
 
     <!-- THIRD SECTION (Contact) -->
-    <div class="w-full h-full flex flex-col min-h-85 justify-center">
+    <div class="bg-bg w-full h-full flex flex-col min-h-85 justify-center">
     </div>
 </template>
