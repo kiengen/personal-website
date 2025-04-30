@@ -5,6 +5,17 @@
   --a: gray;
   --b: #4066ce;
   --ui: #464646;
+  --not-ui: white;
+}
+
+@layer no-utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @theme inline {
@@ -13,6 +24,7 @@
   --color-b: var(--b);
   --color-c: var(--c);
   --color-ui: var(--ui);
+  --color-not-ui: var(--not-ui);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +33,7 @@
     --a: #4fcaf0;
     --b: #4066ce;
     --ui: white;
+    --not-ui: #464646;
   }
 }
 

@@ -4,7 +4,6 @@
 
 <template>
 	<div class="w-screen h-screen">
-		<Header />
 		<router-view />
 	</div>
 </template>

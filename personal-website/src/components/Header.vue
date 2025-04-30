@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import HeaderButton from './HeaderButton.vue';
+    import FeatherButton from './FeatherButton.vue';
 </script>
 
 <template>
@@ -13,7 +14,7 @@
             <HeaderButton msg="projects" class="font-medium" @click="console.log('projects')"/>
             <HeaderButton msg="about" class="font-medium" @click="console.log('about')"/>
             <HeaderButton msg="contact" class="font-medium" @click="console.log('contact')"/>
-            <HeaderButton msg="sun" feather={true} class="font-medium" @click="console.log('theme')"/>
+            <FeatherButton class="rounded-sm" iconName="sun" size="20" strokeWidth="2.2"/>
         </div>
         <div class="grow"/>
     </div>
