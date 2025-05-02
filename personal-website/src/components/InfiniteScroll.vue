@@ -45,7 +45,7 @@
 </script>
 
 <template>
-    <div @scroll="scrollCheck" @mouseenter="toggleHover" @mouseleave="toggleHover" class="flex flex-1 flex-row w-full h-50 overflow-y-auto no-scrollbar" ref="container" :id="'container'+id">
+    <div @scroll="scrollCheck" @mouseenter="toggleHover" @mouseleave="toggleHover" class="flex flex-1 flex-row w-full h-full overflow-y-auto no-scrollbar" ref="container" :id="'container'+id">
         <div class="flex flex-1 w-screen h-full" v-for="item in inputItems" :key="item.name">
             <ProjectTile :name="item.name" :photo="'assets/'+item.photo" :clickable="clickable"/>
         </div>

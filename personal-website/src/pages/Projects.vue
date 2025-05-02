@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="md:hidden flex w-full h-full flex-col">
-            <div class="flex flex-4 items-center">
+            <div class="flex flex-5 items-center">
                 <div class="m-10 w-full h-3/4 border-ui border-1 rounded-sm flex flex-row">
                     <div class="flex w-full h-full bg-a flex-col">
                         <h1 class="m-1 w-full text-ui">Project Name</h1>
@@ -56,9 +56,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-5 bg-b">
-                <InfiniteScroll :inputItems="projects" id="0" :clickable="true"></InfiniteScroll>
+            <div class="flex flex-3 bg-b items-center">
+                <InfiniteScroll class="min-h-40 max-h-50" :inputItems="projects" id="0" :clickable="true"></InfiniteScroll>
             </div>
+            <div class="flex flex-1 shrink"/>
         </div>
     </div>
 </template>
