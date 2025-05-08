@@ -30,12 +30,12 @@
     </div>
 
     <!-- SECOND SECTION (Project Carousel) -->
-    <div class="bg-bg w-full h-[80vw] max-h-150 flex flex-col min-h-85 justify-center">
+    <h1 class="bg-bg text-3xl text-ui h-15 font-medium">Projects</h1>
+    <div class="bg-bg w-full aspect-video max-h-120 flex flex-col min-h-100 justify-center">
         <div class="mask-x-from-75% mask-x-to-95% h-full w-full max-h-150 flex flex-col">
-            <h1 class="text-3xl text-ui h-15 font-medium">Projects</h1>
-            <InfiniteScroll class="max-h-[25vw] h-20 " :inputItems="projects" id="1" :clickable="false"/>
-            <InfiniteScroll class="max-h-[25vw] h-20 " :inputItems="projects" id="2" :clickable="false" offset="3"/>
-            <InfiniteScroll class="max-h-[25vw] h-20 " :inputItems="projects" id="3" :clickable="false" offset="9"/>
+            <InfiniteScroll class="h-1/1 min-h-20" :inputItems="projects" id="1" :clickable="false"/>
+            <InfiniteScroll class="h-1/1 min-h-20" :inputItems="projects" id="2" :clickable="false" offset="3"/>
+            <InfiniteScroll class="h-1/1 min-h-20" :inputItems="projects" id="3" :clickable="false" offset="9"/>
         </div>
     </div>
     <div class="bg-bg flex w-full h-15 justify-center items-end">
