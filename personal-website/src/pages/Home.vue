@@ -5,6 +5,7 @@
     import InfiniteScroll from '../components/InfiniteScroll.vue';
 
     import { useProjectData } from '../stores/ProjectData';
+    import { RouterLink } from 'vue-router';
 
     // the info about all of my proejcts (name, photo source, id for url)
     const projects = useProjectData().projects;
@@ -39,7 +40,7 @@
         </div>
     </div>
     <div class="bg-bg flex w-full h-15 justify-center items-end">
-        <HeaderButton class="flex border-1 max-w-50 max-h-8" msg="view all projects"/>
+        <RouterLink to="/projects"><HeaderButton class="flex border-1 max-w-50 max-h-8" msg="view all projects"/></RouterLink>
 
     </div>
     <div class="bg-bg h-30 content-end">

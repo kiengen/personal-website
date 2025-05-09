@@ -14,7 +14,7 @@
             <RouterLink to="/"><HeaderButton msg="home" class="font-medium" @click="console.log('home')"/></RouterLink>
             <RouterLink to="/projects"><HeaderButton msg="projects" class="font-medium"/></RouterLink>
             <RouterLink to="/about"><HeaderButton msg="about" class="font-medium"/></RouterLink>
-            <RouterLink to="/contact"><HeaderButton msg="contact" class="font-medium" @click="console.log('contact')"/></RouterLink>
+            <RouterLink to="/contact"><HeaderButton msg="contact" class="font-medium"/></RouterLink>
             <!-- <FeatherButton class="rounded-sm" iconName="sun" size="20" strokeWidth="2.2" @click="toggleDarkMode"/> -->
         </div>
         <div class="grow"/>
