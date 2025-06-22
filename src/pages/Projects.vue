@@ -47,7 +47,7 @@
                     <!-- Shows for medium screens -->
                     <div class="lg:hidden h-17/20">
                         <div class="mt-2 mb-2 flex flex-1 w-full h-1/2 flex-row items-center">
-                            <img class="min-w-10 max-w-83.25 w-3/5 h-full object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
+                            <img class="min-w-10 min-h-10 w-3/5 h-full object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
                             <div class="flex flex-col w-2/5 h-full">
                                 <p class="text-left text-ui font-semibold">Frameworks</p>
                                 <div class="flex flex-wrap h-full gap-y-3.5 gap-x-3 p-1.5 content-start">
@@ -61,9 +61,9 @@
                         </div>
                     </div>
                     <!-- Shows for large screens -->
-                    <div class="lg:flex hidden h-17/20 flex-row mt-2">
+                    <div class="lg:flex hidden h-17/20 flex-row">
                         <div class="flex flex-5 flex-col">
-                            <img class="min-w-10 min-h-10 w-full h-1/2 object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
+                            <img class="min-w-10 min-h-10 w-full h-11/20 object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
                             <p class="mt-4 ml-3 text-left text-ui font-semibold">Frameworks</p>
                             <div class="p-3 flex flex-wrap h-8/20 gap-y-3.5 gap-x-7 p-1.5 content-start">
                                 <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" class="object-contain h-1/4 object-fill hover:scale-120 duration-200 ease-in-out" v-for="framework in curProj.frameworks" :src="'assets/frameworks/'+framework+'.svg'"/>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <!-- List of frameworks -->
-                    <div class="ml-2 pl-2 mr-4 pr-2 overflow-x-auto flex flex-row h-3/10 items-center justify-start mt-2 pb-1 mb-1">
+                    <div class="pl-4 ml-0 mr-4 overflow-x-auto flex flex-row h-3/10 items-center justify-start m-2">
                         <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" v-for="framework in curProj.frameworks" class="first:pl-0 first:ml-0 last:mr-0 m-2 mt-1 w-fit h-4/6 object-fill hover:scale-130 duration-200 ease-in-out" :src="'assets/frameworks/'+framework+'.svg'"/>
                     </div>
                 </div>
