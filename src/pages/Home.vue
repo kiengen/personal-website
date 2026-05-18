@@ -18,9 +18,9 @@
             <p class="h-20 content-center text-5xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-lime-300 via-green-300 to-cyan-400">Hi! I'm <b>Kiersten</b>.</p>
             <p class="w-9/10 text-lg text-ui">I am a software engineering student with a passion for programming.</p>
             <div class="flex w-1/3 min-w-56 max-w-70 flex-row h-14 justify-around items-end">
-                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="github"/>
-                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="linkedin"/>
-                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="mail"/>
+                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="github" href="https://github.com/kiengen"}/>
+                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="linkedin" href="https://linkedin.com/in/kiersten-engen"/>
+                <FeatherButton class="border-1 rounded-full" strokeWidth="1.5" iconName="mail" href="mailto:ksengen@uwaterloo.ca"/>
             </div>
         </div>
         <div class="flex-3 content-end">
