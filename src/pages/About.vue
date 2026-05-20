@@ -61,7 +61,7 @@
                             <div class="flex flex-col w-full h-full bg-neutral-600">
                                 <div class="flex-4 p-3 pb-0">
                                     <div class="relative t-0 l-0 w-full h-full">
-                                        <img class="absolute t-0 l-0 w-full h-full object-cover rounded-sm" src=""/>
+                                        <img class="absolute t-0 l-0 w-full h-full object-cover rounded-sm" :src="'assets/about/poke.png'"/>
                                     </div>
                                 </div>
                                 <div class="flex h-11 sm:h-13 md:h-23 lg:h-26 items-center justify-center">
@@ -93,7 +93,7 @@
                             <div class="flex flex-col w-full h-full bg-neutral-600">
                                 <div class="flex-4 p-3 pb-0">
                                     <div class="relative t-0 l-0 w-full h-full">
-                                        <img class="absolute t-0 l-0 w-full h-full object-cover rounded-sm" src=""/>
+                                        <img class="absolute t-0 l-0 w-full h-full object-cover rounded-sm" :src="'assets/about/books.png'"/>
                                     </div>
                                 </div>
                                 <div class="flex h-11 sm:h-13 md:h-23 lg:h-26 items-center justify-center">

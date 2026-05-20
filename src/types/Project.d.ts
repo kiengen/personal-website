@@ -1,11 +1,11 @@
 export {};
 declare global {
     interface Project {
+        id: string,
         name: string,
-        photos: string[],
         description: string,
-        frameworks: string[],
+        frameworks: Framework[],
         dates: string,
-        keywords: string[],
+        keywords: Category[],
     }
 }

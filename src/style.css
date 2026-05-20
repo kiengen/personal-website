@@ -18,6 +18,10 @@
   }
 }
 
+@utility animate-once {
+  animation-iteration-count: 1;
+}
+
 @theme inline {
   --color-bg: var(--background);
   --color-a: var(--a);

@@ -1,14 +1,15 @@
 <script setup lang="ts">
+    import { useRouter } from 'vue-router';
     import { ref } from 'vue';
 
     import Header from '../components/Header.vue';
     import FeatherButton from '../components/FeatherButton.vue';
     import InfiniteScroll from '../components/InfiniteScroll.vue';
 
-    import { useProjectData } from '../stores/ProjectData';
+    import { projects } from '../../data/projects';
+    import { frameworks } from '../../data/frameworks';
 
-    const projects = useProjectData().projects;
-    const curProj = ref(projects[0] as Project);
+    const curProj = ref(projects[0]);
 
     const toolTipPos = ref({x: 0, y: 0});
     const toolTipHidden = ref(true);
@@ -16,8 +17,26 @@
 
     window.addEventListener('mousemove', updateToolTipPosition);
 
+    // check for project in url data
+    const router = useRouter();
+    const queryParams = router.currentRoute.value.query;
+    if (queryParams != null && 'project' in queryParams) {
+        for (let i = 0; i < projects.length; ++i) {
+            if (projects[i].id == queryParams['project']) {
+                receiveProject(projects[i]);
+                break;
+            }
+        }
+    }
+
     function receiveProject(data: Project) : void {
         curProj.value = data;
+        router.replace({
+            path: '/projects',
+            query: {
+                project: curProj.value.id,
+            }
+        });
     }
 
     function updateToolTipPosition(e: any) : void {
@@ -32,26 +51,69 @@
 </script>
 
 <template>
+    <!-- Small Screens -->
+    <div class="w-full h-full flex flex-col min-h-85">
+        <Header />
+        <div class="sm:hidden flex flex-col h-full justify-center items-center">
+            <div class="flex flex-1 w-full items-center">
+                <div class="flex justify-center items-center w-full h-9/10">
+                    <div class="flex flex-col w-19/20 h-full rounded-xl">
+                        <!-- Project Name -->
+                        <div class="flex items-center justify-center max-h-10 md:max-h-13 h-1/4 text-lg font-bold color-black">
+                            <p class="w-full h-fit text-2xl md:text-3xl text-black text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-green-300 to-cyan-400">{{curProj.name}}</p>
+                        </div>
+
+                        <div class="flex flex-row w-full h-full">
+                            <!-- Project Image -->
+                            <div class="w-full h-full items-center justify-center p-3">
+                                <div class="p-[1px] w-1/1 h-1/1 bg-ui rounded-md">
+                                    <img class="w-1/1 h-full object-cover rounded-md" :src="'assets/'+curProj.id+'/thumbnail.png'"/>
+                                </div>
+                            </div>
+
+                            <!-- Project Description -->
+                            <div class="flex flex-col p-3 w-full h-full">
+                                <p class="text-xs text-left text-ui whitespace-pre-wrap">{{curProj.description[1]}}</p>
+                                <div class="flex gap-1 flex-col justify-end items-start grow w-full">
+                                    <p class="pt-2 text-ui font-semibold">Frameworks</p>
+                                    <div class="grid gap-2 grid-rows-2 grid-cols-6 w-full h-fit">
+                                        <div class="flex flex-1 w-full aspect-square" v-for="framework_name in curProj.frameworks" :key="framework_name">
+                                            <img class="object-contain" :src="'assets/frameworks/'+framework_name+'.png'"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full max-h-50 h-1/3 bg-orange-400">
+                <div class="w-full h-9/10 bg-orange-500">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- tooltip that appears when hovering over frameworks-->
-    <div class="z-2 pointer-events-none overflow-visible absolute w-0 h-0">
+    <!-- <div class="z-2 pointer-events-none overflow-visible absolute w-0 h-0">
         <div v-if="!toolTipHidden" id="tooltip" :style="{left: toolTipPos.x + 'px', top: toolTipPos.y + 'px'}" class="relative bg-black min-w-20 w-fit h-fit min-h-6 text-white text-nowrap pl-2 pr-2">{{ toolTipText }}</div>
     </div>
     <div class="bg-bg w-full h-full flex flex-col min-h-108">
         <Header class="h-1/9" />
         <!-- Shows for medium and large screens -->
-        <div class="hidden md:flex flex w-full h-8/9 min-h-100 flex-row grow align-center justify-center">
+        <!-- <div class="hidden md:flex flex w-full h-8/9 min-h-100 flex-row grow align-center justify-center">
             <div class="flex flex-8 flex-row justify-center items-center max-w-270">
                 <div class="flex flex-1 shrink"/>
                 <div class="bg-neutral-600 content-center flex-20 w-1/1 h-8/9 max-h-140 border-1 rounded-md border-ui p-4 pt-0">
                     <h1 class="text-xl font-semibold text-ui h-1/10 content-center">{{ curProj.name }}</h1>
                     <!-- Shows for medium screens -->
-                    <div class="lg:hidden h-17/20">
+                    <!-- <div class="lg:hidden h-17/20">
                         <div class="mt-2 mb-2 flex flex-1 w-full h-1/2 flex-row items-center">
-                            <img class="min-w-10 min-h-10 w-3/5 h-full object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
+                            <img class="min-w-10 min-h-10 w-3/5 h-full object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.id+'/thumbnail.png'"/>
                             <div class="flex flex-col w-2/5 h-full">
                                 <p class="text-left text-ui font-semibold">Frameworks</p>
                                 <div class="flex flex-wrap h-full gap-y-3.5 gap-x-3 p-1.5 content-start">
-                                    <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" class="object-contain h-2/13 object-fill hover:scale-130 duration-200 ease-in-out" v-for="framework in curProj.frameworks" :src="'assets/frameworks/'+framework+'.svg'"/>
+                                    <img @mouseover="updateToolTipText(frameworks[framework_name].name)" @mouseleave="toolTipHidden = true" class="object-contain h-2/13 object-fill hover:scale-130 duration-200 ease-in-out" v-for="framework_name in curProj.frameworks" :src="'assets/frameworks/'+framework_name+'.png'"/>
                                 </div>
                             </div>
                         </div>
@@ -61,12 +123,12 @@
                         </div>
                     </div>
                     <!-- Shows for large screens -->
-                    <div class="lg:flex hidden h-17/20 flex-row">
+                    <!-- <div class="lg:flex hidden h-17/20 flex-row">
                         <div class="flex flex-5 flex-col">
-                            <img class="min-w-10 min-h-10 w-full h-11/20 object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.photos[0]"/>
+                            <img class="min-w-10 min-h-10 w-full h-11/20 object-cover border-1 border-ui mr-3" :src="'assets/'+curProj.id+'/thumbnail.png'"/>
                             <p class="mt-4 ml-3 text-left text-ui font-semibold">Frameworks</p>
                             <div class="p-3 flex flex-wrap h-8/20 gap-y-3.5 gap-x-7 p-1.5 content-start">
-                                <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" class="object-contain h-1/4 object-fill hover:scale-120 duration-200 ease-in-out" v-for="framework in curProj.frameworks" :src="'assets/frameworks/'+framework+'.svg'"/>
+                                <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" class="object-contain h-1/4 object-fill hover:scale-120 duration-200 ease-in-out" v-for="framework in curProj.frameworks" :src="'assets/frameworks/'+framework+'.png'"/>
                             </div>
                         </div>
                         <div class="ml-4 pl-4 flex-4 w-1/2 h-full overflow-y-auto pr-4">
@@ -78,40 +140,40 @@
                 <div class="flex flex-1 shrink"/>
             </div>
             <div class="flex flex-3 min-w-20 max-w-120 justify-center">
-                <InfiniteScroll @project-data="receiveProject" class="z-2 w-1/2 max-w-80 flex-col h-full" :inputItems="projects" id="1" :clickable="true" direction="col"/>
+                <InfiniteScroll @project-data="receiveProject" class="z-2 w-1/2 max-w-80 flex-col h-full" :inputItems="projects" id="1" :clickable="true" direction="up"/>
             </div>
         </div>
 
         <!-- Shows for small screens -->
-        <div class="md:hidden flex w-full h-full flex-col min-h-115 bg-bg">
+        <!-- <div class="md:hidden flex w-full h-full flex-col min-h-115 bg-bg">
             <div class="flex flex-col flex-5 items-center">
                 <div class="flex flex-1 shrink"/>
                 <!-- Project card at top of screen -->
-                <div class="mt-2 mb-2 flex-10 h-1/1 grow bg-neutral-600 w-9/10 max-h-70 border-ui border-1 rounded-sm flex flex-col">
+                <!-- <div class="mt-2 mb-2 flex-10 h-1/1 grow bg-neutral-600 w-9/10 max-h-70 border-ui border-1 rounded-sm flex flex-col">
                     <div class="flex w-full h-4/5 flex-row">
                         <!-- Left Half (title/image carousel) -->
-                        <div class="ml-4 mr-2 flex flex-2 w-9/20 h-full flex-col">
+                        <!-- <div class="ml-4 mr-2 flex flex-2 w-9/20 h-full flex-col">
                             <h1 class="mt-3 m-1 w-full h-fit text-ui content-center text-xl font-semibold">{{curProj.name}}</h1>
-                            <img class="w-1/1 h-full object-cover border-1 border-ui" :src="'assets/'+curProj.photos[0]"/>
+                            <img class="w-1/1 h-full object-cover border-1 border-ui" :src="'assets/'+curProj.id+'/thumbnail.png'"/>
                         </div>
                         <!-- Right Half (description) -->
-                        <div class="mt-3 flex w-11/20 h-19/20 flex-col overflow-auto mr-3 pr-3">
+                        <!-- <div class="mt-3 flex w-11/20 h-19/20 flex-col overflow-auto mr-3 pr-3">
                             <p class="m-4 mt-0 mb-0 font-semibold text-left text-ui">What is it?</p>
                             <p class="m-4 mr-0 mt-0 text-left flex-5 text-ui">{{curProj.description}}</p>
                         </div>
                     </div>
                     <!-- List of frameworks -->
-                    <div class="pl-4 ml-0 mr-4 overflow-x-auto flex flex-row h-3/10 items-center justify-start m-2">
-                        <img @mouseover="updateToolTipText(framework)" @mouseleave="toolTipHidden = true" v-for="framework in curProj.frameworks" class="first:pl-0 first:ml-0 last:mr-0 m-2 mt-1 w-fit h-4/6 object-fill hover:scale-130 duration-200 ease-in-out" :src="'assets/frameworks/'+framework+'.svg'"/>
+                    <!-- <div class="pl-4 ml-0 mr-4 overflow-x-auto flex flex-row h-3/10 items-center justify-start m-2">
+                        <img @mouseover="updateToolTipText(frameworks[framework_name])" @mouseleave="toolTipHidden = true" v-for="framework_name in curProj.frameworks" class="first:pl-0 first:ml-0 last:mr-0 m-2 mt-1 w-fit h-4/6 object-fill hover:scale-130 duration-200 ease-in-out" :src="'assets/frameworks/'+framework_name+'.png'"/>
                     </div>
                 </div>
                 <div class="flex flex-1 shrink"/>
             </div>
             <!-- Project Scroll at bottom of screen -->
-            <div class="flex flex-4 items-center">
+            <!-- <div class="flex flex-4 items-center">
                 <InfiniteScroll @project-data="receiveProject" class="min-h-40 max-h-50 h-full" :inputItems="projects" id="0" :clickable="true"/>
             </div>
             <div class="flex flex-1 shrink"/>
         </div>
-    </div>
+    </div> -->
 </template>

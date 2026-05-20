@@ -7,9 +7,10 @@
                                 offset?: string,
                                 clickable?: boolean,
                                 direction?: string,
+                                autoscroll?: boolean,
                 }>()
     
-    //let intervalId = 0;
+    let intervalId = 0;
     const hover = ref(false);
 
     const container = ref(document.getElementById("container"+props.id) as HTMLElement);
@@ -26,24 +27,34 @@
 
     onMounted(() => {
         container.value = document.getElementById("container"+props.id) as HTMLElement;
-        if(props.direction) {
+        if(props.direction == "up" || props.direction == "down") {
             container.value.scrollTop += parseInt(props.offset ?? "0")*100;
         }
         else {
             container.value.scrollLeft += parseInt(props.offset ?? "0")*100;
         }
-        /**intervalId = setInterval(() => {
-            if(!hover.value) {
-                container.scrollLeft += 1;
-            }
-            if(container.scrollLeft >= container.scrollWidth/3) {
-                container.scrollLeft = 0;
-            }
-        }, 50);**/
+
+        // shifts infinite scrolls every 60ms
+        if (props.autoscroll) {
+            intervalId = setInterval(() => {
+                if(!hover.value) {
+                    if (props.direction == "left" || props.direction == "right") {
+                        container.value.scrollLeft += 2*(props.direction == "left")-1;
+
+                    }
+                    else {
+                        container.value.scrollTop += 2*(props.direction == "up")-1;
+                    }
+                }
+                if(container.value.scrollLeft >= container.scrollWidth/3) {
+                    container.value.scrollLeft = 0;
+                }
+            }, 60);
+        }
     });
 
     function scrollCheck() : void {
-        if(props.direction) {
+        if(props.direction == "up" || props.direction == "down") {
             if(container.value.scrollTop >= container.value.scrollHeight/3) {
                 container.value.scrollTop = 0.05;
             }
@@ -61,22 +72,22 @@
         }
     }
 
-    /**onBeforeUnmount(() => {
+    onBeforeUnmount(() => {
         clearInterval(intervalId);
-    });**/
+    });
 </script>
 
 <template>
-    <div @scroll="scrollCheck" @mouseenter="toggleHover" @mouseleave="toggleHover" :class="'flex flex-1 flex-'+(direction ? 'col h-fit w-1/1' : 'row w-fit h-1/1')+' overflow-auto no-scrollbar'" ref="container" :id="'container'+id">
-        <div :class="'flex flex-1 '+(direction ? 'h-screen flex-col' : 'w-screen flex-row')">
-            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.name">
-                <ProjectTile :name="item.name" :photo="'assets/'+item.photos[0]" :clickable="clickable" @click="sendData(item)"/>
+    <div @scroll="scrollCheck" @mouseenter="toggleHover" @mouseleave="toggleHover" :class="'flex flex-1 flex-'+((props.direction == 'up' || props.direction == 'down') ? 'col h-fit w-1/1' : 'row w-fit h-1/1')+' overflow-auto no-scrollbar'" ref="container" :id="'container'+id">
+        <div :class="'flex flex-1 '+((props.direction == 'up' || props.direction == 'down') ? 'h-screen flex-col' : 'w-screen flex-row')">
+            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.id">
+                <ProjectTile :name="item.name" :photo="'assets/'+item.id+'/thumbnail.png'" :clickable="clickable" @click="sendData(item)"/>
             </div>
-            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.name">
-                <ProjectTile :name="item.name" :photo="'assets/'+item.photos[0]" :clickable="clickable" @click="sendData(item)"/>
+            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.id">
+                <ProjectTile :name="item.name" :photo="'assets/'+item.id+'/thumbnail.png'" :clickable="clickable" @click="sendData(item)"/>
             </div>
-            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.name">
-                <ProjectTile :name="item.name" :photo="'assets/'+item.photos[0]" :clickable="clickable" @click="sendData(item)"/>
+            <div class="flex flex-1 w-full h-full" v-for="item in inputItems" :key="item.id">
+                <ProjectTile :name="item.name" :photo="'assets/'+item.id+'/thumbnail.png'" :clickable="clickable" @click="sendData(item)"/>
             </div>
             </div>
     </div>
